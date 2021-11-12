@@ -9,6 +9,20 @@ Empty sections are not saved unless SaveEmptySections is set to true. Whitespace
 
 Attempting to retrieve missing sections or values through indexing will not throw exceptions.
 
+# What's new
+Easy way to get and set value
+```csharp
+ini["test2", "double"] = 1E32;
+ini.Set("test2.str", "str23333");
+ini.Set("test2.isOK", true);
+
+string str = ini.Get("test2.str").AsString;
+double d = ini.Get("test2.double").AsDouble;
+bool b = ini["test2", "isOK"].AsBool;
+```
+Save woundn't erase comment. You can add normal comment with ';' and then change ini values and then save it, comment will still there.
+
+
 # Saving
 ```csharp
 var ini = new IniFile();
@@ -27,6 +41,10 @@ ini["test2"]["str"] = "normal string";
 ini["test2"]["quotstr"] = "\"quoted string\"";
 ini["test2"]["wstr"] = "    whitespace string    ";
 ini["test2"]["wquotstr"] = "      \"      quoted whitespace string     \"     ";
+
+//or like that:
+ini["test2", "str"] = "11111";
+ini.Set("test2.str", "str23333");
 
 ini.Save("test.ini");
 ```
@@ -57,6 +75,12 @@ Console.WriteLine(ini["test2"]["wquotstr"].GetString(true, false));
 Console.WriteLine(ini["test2"]["wquotstr"].GetString(false, false));
 Console.WriteLine(ini["test2"]["wquotstr"].GetString(true, true));
 Console.WriteLine(ini["test2"]["wquotstr"].GetString(false, true));
+
+// or just like this:
+Console.WriteLine(ini["test1","doubleA"].AsDouble;
+Console.WriteLine(ini["test1","doubleB"].AsDouble;
+Console.WriteLine(ini.Get("test2.wstr").AsString);
+Console.WriteLine(ini.Get("test2.wquotstr").AsString);
 ```
 
 If you want to know whether the conversion succeeded instead of supplying a default value for invalid conversions, use TryConvertBool, TryConvertInt, and TryConvertDouble functions.
