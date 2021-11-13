@@ -20,7 +20,10 @@ string str = ini.Get("test2.str").AsString;
 double d = ini.Get("test2.double").AsDouble;
 bool b = ini["test2", "isOK"].AsBool;
 ```
-Save woundn't erase comment. You can add normal comment with ';' and then change ini values and then save it, comment will still there.
+Save() will no longer erase comment start with ';'. You can only add comment in a text editor.  
+
+New issue: 
+    Multiline string value wouldn't work properly.
 
 
 # Saving
